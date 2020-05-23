@@ -93,3 +93,24 @@ To remove relative path while importing components and make them absolute to `sr
 ```
 
 ## Note: After one test is passed, try to make that test break to be sure that test is completely passed.
+
+To add some common logic inside a test file and remove duplicated code inside each test, we use `beforeEach()` method. It take a function and will be executed before each `it` (test).
+
+```JavaScript
+// to remove duplicated logic inside test we use beforeEach method that belongs to `jest`. Any logic inside beforeEach will be executed before each `it` test.
+let component;
+beforeEach(() => {
+	component = shallow(<App />);
+});
+
+it('should show a CommentBox', () => {
+	// find method will return array that contains all instances of `CommentBox`
+	expect(component.find(CommentBox).length).toEqual(1);
+});
+
+it('should show a CommentList', () => {
+	// find method will return array that contains all instances of `CommentList`
+	expect(component.find(CommentList).length).toEqual(1);
+});
+
+```
