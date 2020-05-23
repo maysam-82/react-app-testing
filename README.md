@@ -36,3 +36,20 @@ it('should show a CommentBox', () => {
 ```
 
 To simulate a browser inside Command Line Environment, `create-react-app` installs a dependency called `JSDOM`.
+This way of testing is not optimal since changing a text in `CommentBox` component will cause an error in this test file. Therefore, we are going to write a test for a component which only have general knowledge of other component inside it. For example, we will write a code for `App` component that tells us that overal `CommentBox` exists.
+
+## Setup Enzyme
+
+- Enter `npm i enzyme enzyme-adapter-react-16`
+- To config Enzyme, Create a file with exact name of `setupTests.js` inside `src` folder. The name of file is important because every time `Jest` is going to run, it will look at `Enzyme` config file with that name.
+
+```JavaScript
+imimport Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({
+	adapter: new Adapter(),
+});
+```
+
+Enzyme is an open source package to let us test React Components.
