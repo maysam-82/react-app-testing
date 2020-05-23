@@ -114,3 +114,26 @@ it('should show a CommentList', () => {
 });
 
 ```
+
+While using `mount` method of `Enzyme`, since it mounts the component to the fake DOM (using `JSDOM`), one test can affect another one that uses the same DOM. Keep that in mind while writing a test to use `unmount` method or something similar as cleanup.
+
+```JavaScript
+import React from 'react';
+import { mount } from 'enzyme';
+import CommentBox from 'Components/CommentBox';
+let component;
+beforeEach(() => {
+	component = mount(<CommentBox />);
+});
+
+//  Doing component cleanup using `unmount()` method. after each `it` function in this file.
+afterEach(() => {
+	component.unmount();
+});
+
+it('should have a textarea and button', () => {
+	expect(component.find('textarea').length).toEqual(1);
+	expect(component.find('button').length).toEqual(1);
+});
+
+```
