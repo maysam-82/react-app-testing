@@ -1,15 +1,3 @@
-# Writing Tests
-
-## Test file names
-
-To create test file:
-
-- Create `__tests__` folder inside component directory.
-- Create a file with extension of either `*.test.js` or `*.spec.js` inside `__tests__`.
-
-## Create test logics:
-
-```JavaScript
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from '../App';
@@ -32,7 +20,3 @@ it('should show a CommentBox', () => {
 	// clean up after the test run by taking the fake div and remove it to improve performance of tests.
 	ReactDOM.unmountComponentAtNode(div);
 });
-
-```
-
-To simulate a browser inside Command Line Environment, `create-react-app` installs a dependency called `JSDOM`.
