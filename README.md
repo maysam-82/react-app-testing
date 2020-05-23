@@ -52,4 +52,44 @@ Enzyme.configure({
 });
 ```
 
-Enzyme is an open source package to let us test React Components.
+Enzyme is an open source package to let us test React Components. It provides three methods to create an instance of components and use `expect` method for them.
+
+- Static: It renders our specific component and will return just a plain HTML.
+- Shallow: It takes a component and only renders that component without any of its children.
+- Full DOM: It takes a component an renders that component with all its children. Events simulations can be handled in this method. This is a full copy of application indeed.
+
+```JavaScript
+import React from 'react';
+import { shallow } from 'enzyme';
+import App from '../App';
+import CommentBox from '../../CommentBox/CommentBox';
+import CommentList from '../../CommentList/CommentList';
+
+it('should show a CommentBox', () => {
+	const component = shallow(<App />);
+	// find method will return array that contains all instances of `CommentBox`
+	expect(component.find(CommentBox).length).toEqual(1);
+});
+
+it('should show a CommentList', () => {
+	const component = shallow(<App />);
+	// find method will return array that contains all instances of `CommentBox`
+	expect(component.find(CommentList).length).toEqual(1);
+});
+
+```
+
+To remove relative path while importing components and make them absolute to `src` folder:
+
+- Create a file with exact name of `jsconfig.json` in root of project.
+
+```json
+{
+	"compilerOptions": {
+		"baseUrl": "src"
+	},
+	"include": ["src"]
+}
+```
+
+## Note: After one test is passed, try to make that test break to be sure that test is completely passed.
