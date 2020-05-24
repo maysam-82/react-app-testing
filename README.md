@@ -202,7 +202,7 @@ describe('the textarea ', () => {
 
 ```
 
-## Redux
+## Redux and React-Redux Test
 
 To pass tests with redux, we can create a helper function called `root.js` and use it inside all test file and `index.js` file.
 
@@ -256,4 +256,28 @@ beforeEach(() => {
 	);
 });
 ...
+```
+
+## Reducer Test
+
+To test a reducer, first call a reducer and pass a fake action and then make an expectation on the value which reducer should return.
+
+```JavaScript
+import commentReducer from 'reducers/comments';
+import * as actionTypes from 'actions/actionTypes';
+
+it('should handle actions of type SAVE_COMMENT', () => {
+	const fakeAction = {
+		type: actionTypes.SAVE_COMMENT,
+		payload: 'new comment',
+	};
+	const newState = commentReducer([], fakeAction);
+	expect(newState).toEqual(['new comment']);
+});
+
+it('should handle action with unknown type', () => {
+	const newState = commentReducer([], { type: 'UNKNOWN' });
+	expect(newState).toEqual([]);
+});
+
 ```
