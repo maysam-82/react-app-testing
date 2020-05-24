@@ -260,7 +260,7 @@ beforeEach(() => {
 
 ## Reducer Test
 
-To test a reducer, first call a reducer and pass a fake action and then make an expectation on the value which reducer should return.
+To test a reducer, we can call a reducer and pass a fake action and then make an expectation on the value which reducer should return.
 
 ```JavaScript
 import commentReducer from 'reducers/comments';
@@ -278,6 +278,27 @@ it('should handle actions of type SAVE_COMMENT', () => {
 it('should handle action with unknown type', () => {
 	const newState = commentReducer([], { type: 'UNKNOWN' });
 	expect(newState).toEqual([]);
+});
+
+```
+
+## Action Creators' test
+
+To test an action creator, we can call the action creator and get the return data and write and expectation for the returned data.
+
+```JavaScript
+import { saveComment } from 'actions/actionCreators';
+import * as actionTypes from 'actions/actionTypes';
+
+describe('saveComment action creator', () => {
+	it('should have the correct type', () => {
+		const action = saveComment();
+		expect(action.type).toEqual(actionTypes.SAVE_COMMENT);
+	});
+	it('should have the correct payload', () => {
+		const action = saveComment('new comment');
+		expect(action.payload).toEqual('new comment');
+	});
 });
 
 ```
