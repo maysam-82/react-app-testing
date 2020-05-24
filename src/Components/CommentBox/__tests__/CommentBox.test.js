@@ -18,7 +18,7 @@ afterEach(() => {
 
 it('should have a textarea and button', () => {
 	expect(component.find('textarea').length).toEqual(1);
-	expect(component.find('button').length).toEqual(1);
+	expect(component.find('button').length).toEqual(2);
 });
 
 // We have common logic for two test. Therefore we will wrapped them wirh `describe` function.
