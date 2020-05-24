@@ -201,3 +201,59 @@ describe('the textarea ', () => {
 });
 
 ```
+
+## Redux
+
+To pass tests with redux, we can create a helper function called `root.js` and use it inside all test file and `index.js` file.
+
+```JavaScript
+// Root.js
+import React from 'react';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducers from 'reducers';
+
+const store = createStore(reducers);
+
+export default ({ children }) => {
+	return <Provider store={store}>{children}</Provider>;
+};
+```
+
+Then refactor `index.js`:
+
+```JavaScript
+// index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from 'Components/App';
+import Root from 'Root';
+
+const store = createStore(reducers);
+
+ReactDOM.render(
+	<Root>
+		<App />
+	</Root>,
+	document.querySelector('#root')
+);
+
+```
+
+Now we can wrap the `Commentbox` component with `Root` component to let it have `store` inside the `Provider` in its parent hierarchy.
+
+```JavaScript
+import React from 'react';
+import { mount } from 'enzyme';
+import CommentBox from 'Components/CommentBox';
+import Root from 'Root';
+let component;
+beforeEach(() => {
+	component = mount(
+		<Root>
+			<CommentBox />
+		</Root>
+	);
+});
+...
+```

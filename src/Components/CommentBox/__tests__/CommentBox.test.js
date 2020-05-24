@@ -1,9 +1,14 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import CommentBox from 'Components/CommentBox';
+import Root from 'Root';
 let component;
 beforeEach(() => {
-	component = mount(<CommentBox />);
+	component = mount(
+		<Root>
+			<CommentBox />
+		</Root>
+	);
 });
 
 //  Doing component cleanup using `unmount()` method. after each `it` function in this file.
