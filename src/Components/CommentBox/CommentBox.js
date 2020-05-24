@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { saveComment } from 'actions/actionCreators';
+import { saveComment, fetchComments } from 'actions/actionCreators';
 import { connect } from 'react-redux';
 
 const CommentBox = (props) => {
@@ -15,6 +15,10 @@ const CommentBox = (props) => {
 		setComment('');
 	};
 
+	const handleFetchComments = () => {
+		props.fetchComments();
+	};
+
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>
@@ -24,8 +28,11 @@ const CommentBox = (props) => {
 					<button>Submit</button>
 				</div>
 			</form>
+			<div>
+				<button onClick={handleFetchComments}>Fetch Comments</button>
+			</div>
 		</div>
 	);
 };
 
-export default connect(null, { saveComment })(CommentBox);
+export default connect(null, { saveComment, fetchComments })(CommentBox);
