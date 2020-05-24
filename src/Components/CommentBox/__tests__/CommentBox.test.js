@@ -17,15 +17,31 @@ it('should have a textarea and button', () => {
 });
 
 it('should have a textarea that users can type in', () => {
-	const textare = component.find('textarea');
+	const textarea = component.find('textarea');
 	// to simulate a change event we use `simulate()` method provided by Enzyme.
 	// `change` is actual name of event as an HTML event not react one.
 	// The second argument of `simulate()` method is a fake event object which acts like a `event.target.value or `{target: { value: 'new comment' }}`
-	textare.simulate('change', {
+	textarea.simulate('change', {
 		target: { value: 'new comment' },
 	});
 	// Forcing component to update
 	component.update();
 	// Making sure that the textarea receives the correct `value` prop.
 	expect(component.find('textarea').prop('value')).toEqual('new comment');
+});
+
+it('should make textarea empty while form is submitting', () => {
+	const textarea = component.find('textarea');
+	// write some text inside texrarea to make sure it is not empty by the use of change event
+	textarea.simulate('change', {
+		target: { value: 'new comment' },
+	});
+	// Force component to update.
+	component.update();
+	// Find form elevent inside component.
+	const form = component.find('form');
+	form.simulate('submit');
+	// Force component to update and change value of textarea to empty.
+	component.update();
+	expect(component.find('textarea').prop('value')).toEqual('');
 });
